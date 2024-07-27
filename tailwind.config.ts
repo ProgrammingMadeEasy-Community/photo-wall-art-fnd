@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#2121C1"
+      },
       backgroundImage: {
         "hero": "url('/images/herobg.png')",
         "auth": "url('/images/auth.png')",

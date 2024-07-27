@@ -2,12 +2,25 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { Frame } from 'iconoir-react'
+import { BiSolidDashboard } from "react-icons/bi";
+import { TiDocumentText } from "react-icons/ti";
+import { IoHelp } from "react-icons/io5";
+import { MdOutlineContactMail } from "react-icons/md";
+
+
+
+
 
 const navLinks = [
-    { id: 1, name: 'Create New Frame', active: true },
-    { id: 2, name: 'Gallery', active: false },
-    { id: 3, name: 'Order History', active: false },
-    { id: 4, name: 'Contact Us', active: false },
+    { id: 1, name: 'Frame your photo', active: false, icon: <Frame className='size-7' /> },
+    { id: 2, name: 'Browser Frames', active: false, icon: <BiSolidDashboard className='size-7' /> },
+    { id: 3, name: 'My orders', active: false, icon: <TiDocumentText className='size-7' /> },
+]
+
+const bottomNavLinks = [
+    { id: 1, name: 'Help Center', active: false, icon: <IoHelp className='size-7' /> },
+    { id: 2, name: 'Contact Us', active: false, icon: <MdOutlineContactMail className='size-7' /> },
 ]
 
 function Hamburger({ }) {
@@ -32,11 +45,23 @@ function Hamburger({ }) {
             <div className={`bg-white absolute h-full top-0 left-0 w-full lg:w-[300px] z-30 lg:rounded-r-[30px] transition-transform overflow-hidden ${open ? 'translate-x-0' : 'lg:-translate-x-[300px] -translate-x-full'}`}>
 
                 <div className='flex flex-col h-full justify-between items-center'>
-                    <div className='h-1/4'></div>
-                    <div className='flex flex-col h-2/4 w-full ml-[40px]'>
-                        <ul className='space-y-8'>
+                    <div className='mt-7 text-2xl font-bold'>Photo Wall</div>
+                    <div className='h-1/6'></div>
+                    <div className='flex flex-col h-5/6 w-full ml-[40px]'>
+                        <ul className='space-y-8 border-t border-b '>
                             {navLinks.map(n => (
-                                <li key={n.id} className={`rounded-l-full cursor-pointer py-[22px] pl-[30px] ${n.active ? 'bg-[#7E7C7C] text-white ' : 'bg-transparent hover:bg-[#7e7c7ca1] hover:text-white'}`}>
+                                <li key={n.id} className={`rounded-l-full cursor-pointer py-[22px] pl-[30px] flex gap-x-2 items-center `}>
+                                    {n.icon}
+                                    <p className='text-2xl'>{n.name}</p>
+                                </li>
+                            ))}
+
+                        </ul>
+
+                        <ul className='space-y-8 border-b mt-8'>
+                            {bottomNavLinks.map(n => (
+                                <li key={n.id} className={`rounded-l-full cursor-pointer py-[18px] pl-[30px] flex gap-x-2 items-center`}>
+                                    {n.icon}
                                     <p className='text-2xl'>{n.name}</p>
                                 </li>
                             ))}

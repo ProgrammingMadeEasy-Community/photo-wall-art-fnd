@@ -1,32 +1,69 @@
+"use client"
+
 import AuthCard from '@/components/auth/AuthCard'
 import InputField from '@/components/auth/InputField';
 import Link from 'next/link';
 import React from 'react'
+import { FaFacebook } from 'react-icons/fa';
+import { FcGoogle } from 'react-icons/fc';
 
 function page() {
+    const [currentComp, setCurrentComponent] = React.useState("")
+    const [name, setName] = React.useState<string>("")
+    const [email, setEmail] = React.useState<string>("")
+    const [code, setCode] = React.useState<string>("")
+
+    const handleNameSubmit = () => {
+        console.log(name)
+        if(currentComp === ""){
+            setCurrentComponent("email")
+        } else if(currentComp === "email"){
+            setCurrentComponent("code")
+        }
+    }
+
+
     return (
         <AuthCard>
-            <div className='py-5 lg:px-[50px] px-8 border h-full'>
-                <div className='flex flex-col items-center gap-2'>
-                    <h3 className='text-[#0A6A88] font-medium text-[30px]'>Create Account</h3>
-                    <p className='font-medium lg:text-[24px] text-lg'>Kindly fill in the necessary details</p>
+            <div className='flex flex-col justify-center items-center h-full gap-y-10 lg:px-16 px-6'>
+
+                <h3 className='lg:text-[40px] text-3xl font-normal'>
+                    {currentComp === 'email' ?
+                        `Hello ${name}! 🤝` 
+                        : currentComp === 'code' ?
+                        <div>
+                            <p >Code sent to Email</p>
+                            <p className='text-sm'>An email with the code has been sent to {email}</p>
+                        </div> 
+                        : "Lets get to know you 🫵"
+                    }
+
+                </h3>
+                {currentComp === 'email' ?
+
+                    <InputField label={""} className="w-full" placeHolder="Email" value={email} onChange={(e: any) => setEmail(e.target.value)} />
+                    :
+                currentComp === 'code' ?
+                <InputField label={""} className="w-full" placeHolder="Enter Code" value={code} onChange={(e: any) => setCode(e.target.value)} />
+                    :
+                    <InputField label={""} className="w-full" placeHolder="Your Name" value={name} onChange={(e: any) => setName(e.target.value)} />
+                }
+
+
+                <div className='gap-y-2 flex flex-col'>
+                    <button className="cursor-pointer lg:px-[95px] bg-gradient-to-r from-[#2F7C57] to-[#A84885] lg:py-5 py-3 px-[60px] text-white lg:rounded-full rounded-[30px] border border-white hover:bg-white hover:-translate-y-1 hover:translate-x-1 transition-transform font-bold lg:text-2xl text-base" onClick={handleNameSubmit}>Continue</button>
+                    {currentComp === "code" ?
+                    <button className='text-center'>Resend</button>
+                    :
+                    <button className='text-center'>Skip</button>
+                    }
+
+                    {/* <p className='font-medium text-[28px]'>OR</p>
+                    <div className='flex gap-5'>
+                        <FaFacebook className='size-10 text-blue-500' />
+                        <FcGoogle className='size-10' />
+                    </div> */}
                 </div>
-
-
-                <div className='space-y-4 mt-[22px]'>
-                    <InputField label={"Email"} />
-                    <InputField label={"Password"} />
-                    <InputField label={"Confirm Password"} />
-
-                    <div className='flex items-center justify-center'>
-                        <button className="z-10 px-[75px] py-3 bg-black text-white rounded-xl border border-white hover:bg-white hover:text-black hover:border-black   hover:-translate-y-1 hover:translate-x-1 transition-transform font-medium lg:text-2xl text-lg mt-3 lg:w-auto w-full">Sign Up</button>
-                    </div>
-
-                    <div>
-                        <p className='text-center mt-10 font-medium lg:text-2xl text-lg'>Already have an account? <Link href={'/auth/login'} className='text-[#0A6A88]'>Sign in</Link></p>
-                    </div>
-                </div>
-
             </div>
         </AuthCard>
     )

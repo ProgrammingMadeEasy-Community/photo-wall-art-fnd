@@ -1,4 +1,6 @@
 import React from 'react'
+import { Image1, Image2, Image3 } from '@/public/new';
+import Image from 'next/image';
 
 function AuthCard({
     children,
@@ -6,16 +8,25 @@ function AuthCard({
     children: React.ReactNode;
 }>) {
     return (
-        <div className='w-[1200px] h-[700px] bg-white rounded-[20px] overflow-hidden flex justify-between mx-3 lg:mx-0'>
+        <div className='w-[1200px] h-[700px] bg-white rounded-[20px] overflow-hidden flex  justify-between mx-3 lg:mx-0 shadow-lg relative'>
 
-            <div className='lg:w-1/2 bg-auth bg-cover h-full relative hidden lg:block'>
-                <div className="h-full w-full bg-black absolute top-0 opacity-50"></div>
-                <p className='pt-6 pl-8 text-white font-bold text-2xl z-50 relative'>Photo Wall</p>
+            <Image src={Image2} alt="" className='absolute right-3 hidden lg:block' />
+            <Image src={Image1} alt="" className='absolute left-0 bottom-0' />
+
+
+            <div className='lg:w-1/2 w-full h-full'>
+                {children}
             </div>
 
+            <div className='lg:w-1/2 w-full h-full lg:flex hidden justify-center items-center'>
 
-            <div className='lg:w-1/2 h-full'>
-                {children}
+
+
+                <div className='flex items-center justify-center flex-col'>
+                    <Image src={Image3} alt="" />
+                    <h3 className='text-2xl text-center'>Experience remarkable and awe-inspiring outcomes with the unparalleled capabilities of our robust yet intuitively designed photo application.</h3>
+                </div>
+
             </div>
 
         </div>
